@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
+// const express = require('express');
+// const router = express.Router();
 
-const catcontroller = require('../controllers/cat.controller');
+// const catcontroller = require('../controllers/cat.controller');
 
-router.get('/:cateId', catcontroller.index);
-// router.get('/', shop.index);
+// router.get('/:cateId', catcontroller.index);
+// // router.get('/', shop.index);
 
-module.exports = router;
+// module.exports = router;
