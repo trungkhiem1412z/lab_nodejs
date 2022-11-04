@@ -1,0 +1,10 @@
+<%- include('partials/header.html') -%>
+
+<div>Inventor</div>
+<h2>Danh sách nhà khoa học</h2>
+
+<% for (i of items) { %>
+<li><%= i.first %> <%= i.last %></li>
+<% } %>
+
+<%- include('partials/footer.html') -%>

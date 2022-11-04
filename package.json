@@ -1,0 +1,32 @@
+{
+	"name": "lab_nodejs",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/trungkhiem1412z/lab_nodejs.git"
+	},
+	"scripts": {
+		"start": "node server.js",
+		"watch": "node-sass --watch lab3/source/scss --output lab3/public/css",
+		"dev": "nodemon --inspect lab3/server.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"body-parser": "^1.20.1",
+		"dotenv": "^16.0.3",
+		"ejs": "^3.1.8",
+		"express": "^4.18.2",
+		"formidable": "^2.0.1",
+		"mongoose": "^6.7.0",
+		"mysql2": "^2.3.3"
+	},
+	"devDependencies": {
+		"bootstrap": "^5.2.2",
+		"morgan": "^1.10.0",
+		"node-sass": "^7.0.3",
+		"nodemon": "^2.0.20"
+	}
+}
