@@ -1,14 +1,20 @@
 const apiApp = require('./api.router');
 const siteRouter = require('./site.router');
-const cat = require('./cat.router');
 const devTest = require('./dev.router');
 
 let initwebRoutes = (app) => {
+	// Api
 	app.use('/api', apiApp);
 	app.use('/dev', devTest);
-	// app.use('/cat', cat);
+	// Category
+	app.use('/cat', (req, res) => {
+		const id = req.query.id;
+		res.render('home', { title: 'Home' });
+	});
+	// Home
 	app.use('/', siteRouter);
-	app.use(function (req, res, next) {
+	// Page 404
+	app.use((req, res, next) => {
 		res.status(404);
 		res.format({
 			html: function () {
