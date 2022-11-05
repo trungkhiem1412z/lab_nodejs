@@ -2,18 +2,26 @@ const path = require('path');
 
 module.exports = {
 	mode: 'development',
-	entry: './lab3/source/js/app.js',
+	entry: './lab4/source/js/app.js',
 	output: {
 		filename: 'bundle.js',
-		path: path.resolve(__dirname, './lab3/public/dist/js'),
+		path: path.resolve(__dirname, './lab4/public/dist/js'),
 	},
 	module: {
 		rules: [
 			{
-				test: /\.s[ac]ss$/i,
+				test: /\.(scss)$/,
 				use: [
 					'style-loader',
 					'css-loader',
+					{
+						loader: 'postcss-loader',
+						options: {
+							postcssOptions: {
+								plugins: () => [require('autoprefixer')],
+							},
+						},
+					},
 					{
 						loader: 'sass-loader',
 						options: {

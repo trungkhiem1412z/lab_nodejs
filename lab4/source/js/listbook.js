@@ -4,8 +4,13 @@ const params = new URL(document.location).searchParams;
 let cat_id = params.get('id');
 // Book list
 export const book_cat = async () => {
-	let response = await axios.get(`http://localhost:5000/api/category/${cat_id}`);
-	return response;
+	if (cat_id == null) {
+		let response = await axios.get(`http://localhost:5000/api/book`);
+		return response;
+	} else {
+		let response = await axios.get(`http://localhost:5000/api/category/${cat_id}`);
+		return response;
+	}
 };
 book_cat().then((response) => {
 	const show_book = document.querySelector('.showbook');
