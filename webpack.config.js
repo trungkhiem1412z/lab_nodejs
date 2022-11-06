@@ -2,10 +2,15 @@ const path = require('path');
 
 module.exports = {
 	mode: 'development',
-	entry: './lab4/source/js/app.js',
+	entry: {
+		app: './lab4/source/js/app.js',
+		admin: './lab4/source/js/admin.js',
+	},
+	devtool: 'inline-source-map',
 	output: {
-		filename: 'bundle.js',
+		filename: '[name].bundle.js',
 		path: path.resolve(__dirname, './lab4/public/dist/js'),
+		clean: true,
 	},
 	module: {
 		rules: [
@@ -44,5 +49,5 @@ module.exports = {
 		port: 5050,
 	},
 	stats: 'errors-only',
-	watch: true,
+	// watch: true,
 };

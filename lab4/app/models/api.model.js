@@ -5,8 +5,10 @@ const Book = (book) => {
 	this.tenLoai = cat.tenLoai;
 	this.thuTu = cat.thuTu;
 	this.anHien = cat.anHien;
+	this.tenSach = this.tenSach;
 };
 
+// Lấy loại sản phẩm
 Book.get_category = (result) => {
 	let sql = 'SELECT id, tenLoai from loai';
 	db.query(sql, (err, book_cat) => {
@@ -18,6 +20,7 @@ Book.get_category = (result) => {
 	});
 };
 
+// Lấy tất cả sản phẩm
 Book.get_all_book = (result) => {
 	let sql = `SELECT * FROM sach`;
 	db.query(sql, (err, book) => {
@@ -29,6 +32,7 @@ Book.get_all_book = (result) => {
 	});
 };
 
+// Lấy sản phẩm theo loại
 Book.get_category_id = (cateId, result) => {
 	let sql = `SELECT * FROM sach WHERE idLoai=${cateId}`;
 	db.query(sql, (err, book) => {
@@ -36,6 +40,20 @@ Book.get_category_id = (cateId, result) => {
 			result(book);
 		} else {
 			console.log(err);
+		}
+	});
+};
+
+// Thêm sản phẩm
+Book.add_book = (newData, result) => {
+	// result(data);
+	let sql = `INSERT INTO sach SET ?`;
+	db.query(sql, newData, (err, book) => {
+		if (!err) {
+			result({ id: book.insertId, ...newData });
+		} else {
+			result(err, null);
+			return;
 		}
 	});
 };

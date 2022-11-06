@@ -11,6 +11,7 @@
 		"start": "node server.js",
 		"dev": "nodemon --inspect lab4/server.js",
 		"build": "webpack",
+		"watch": "webpack --watch",
 		"serve": "webpack serve --mode development"
 	},
 	"author": "",
@@ -29,6 +30,7 @@
 	"devDependencies": {
 		"autoprefixer": "^10.4.13",
 		"css-loader": "^6.7.1",
+		"lodash": "^4.17.21",
 		"morgan": "^1.10.0",
 		"nodemon": "^2.0.20",
 		"postcss-loader": "^7.0.1",
