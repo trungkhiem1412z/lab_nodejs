@@ -3,7 +3,7 @@ const params = new URL(document.location).searchParams;
 // Get ID
 let cat_id = params.get('id');
 // Book list
-export const book_cat = async () => {
+const book_cat = async () => {
 	let response = await axios.get(`http://localhost:5000/api/book`);
 	return response;
 };

@@ -1,10 +1,9 @@
 const path = require('path');
 
 module.exports = {
-	mode: 'development',
+	mode: 'production',
 	entry: {
 		app: './lab4/source/js/app.js',
-		admin: './lab4/source/js/admin.js',
 	},
 	devtool: 'inline-source-map',
 	output: {
@@ -41,6 +40,11 @@ module.exports = {
 			},
 		],
 	},
+	// optimization: {
+	// 	splitChunks: {
+	// 		chunks: 'all',
+	// 	},
+	// },
 	devServer: {
 		static: {
 			directory: path.join(__dirname, 'public'),
@@ -48,6 +52,6 @@ module.exports = {
 		compress: true,
 		port: 5050,
 	},
-	stats: 'errors-only',
+	// stats: 'errors-only',
 	// watch: true,
 };

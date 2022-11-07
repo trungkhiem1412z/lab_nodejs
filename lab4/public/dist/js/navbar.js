@@ -1,5 +1,5 @@
 // Category
-export const getCategory = async () => {
+const getCategory = async () => {
 	let res = await axios.get('http://localhost:5000/api/category');
 	return res;
 };
