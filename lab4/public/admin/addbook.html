@@ -3,21 +3,21 @@
 <div class="content">
   Thêm sản phẩm
   <div class="container">
-    <form method="POST" action="/addbook">
+    <form id="form">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Tên Sách</label>
-        <input type="text" class="form-control shadow-none" placeholder="Tên sách" name="tenSach">
+        <input type="text" class="form-control shadow-none" placeholder="Tên sách" id="tenSach">
       </div>
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
-        <textarea class="form-control shadow-none" rows="3" name="moTa"></textarea>
+        <textarea class="form-control shadow-none" rows="3" id="moTa"></textarea>
       </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Giá</label>
-        <input type="number" class="form-control shadow-none" placeholder="Tên sách" name="gia">
+        <input type="number" class="form-control shadow-none" placeholder="Tên sách" id="gia">
       </div>
       <label for="exampleDataList" class="form-label">Loại sách</label>
-      <input class="form-control shadow-none" list="datalistOptions" placeholder="Nhập loại ..." name="idLoai">
+      <input class="form-control shadow-none" list="datalistOptions" placeholder="Nhập loại ..." id="idLoai">
       <datalist id="datalistOptions">
         <option value="Lịch sử">
         <option value="Văn học">
@@ -27,16 +27,16 @@
       </datalist>
       <div class="mb-3">
         <label for="formFile" class="form-label">Ảnh bìa</label>
-        <input class="form-control shadow-none" type="file" id="formFile" name="urlHinh">
+        <input class="form-control shadow-none" type="file" id="urlHinh" name="urlHinh">
       </div>
       <div class="mb-3 form-check">
-        <input class="form-check-input shadow-none" type="checkbox" value="1" checked name="anHien">
+        <input class="form-check-input shadow-none" type="checkbox" value="1" checked id="anHien">
         <label class="form-check-label" for="flexCheckChecked">
           Hiện sách
         </label>
       </div>
       <div class="mb-3">
-        <button class="btn btn-success" type="submit">Thêm sách</button>
+        <button id="addbook" type="submit" class="btn btn-success">Thêm sách</button>
       </div>
     </form>
   </div>
@@ -44,6 +44,6 @@
 <%- include('partials/footer-admin.html') -%>
 </body>
 <!-- JS -->
-<script src="/admin.js"></script>
+<script src="/admin-addbook.js"></script>
 
 </html>
