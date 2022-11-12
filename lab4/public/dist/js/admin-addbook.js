@@ -1,31 +1,3 @@
-// const addProduct = document.querySelector('#addbook');
-// addProduct.onclick = () => {
-// 	const url = `http://localhost:5000/api/addbook`;
-// 	const book = {
-// 		tenSach: document.querySelector('#tenSach').value.trim(),
-// 		moTa: document.querySelector('#moTa').value.trim(),
-// 		urlHinh: document.querySelector('#urlHinh').files,
-// 		gia: document.querySelector('#gia').value.trim(),
-// 		idLoai: document.querySelector('#idLoai').value.trim(),
-// 		anHien: document.querySelector('#anHien').value.trim(),
-// 	};
-// const options = {
-// 	method: 'POST',
-// 	body: JSON.stringify(book),
-// 	headers: { 'Content-Type': 'application/json' },
-// };
-// 	axios
-// 		.post('http://localhost:5000/api/addbook', book, {
-// 			headers: { 'Content-Type': 'multipart/form-data' },
-// 		})
-// 		.then(function (res) {
-// 			console.log('Thành công!');
-// 		})
-// 		.catch(function (err) {
-// 			console.log(err.message);
-// 		});
-// };
-
 const form = document.querySelector('form');
 
 form.addEventListener('submit', (e) => {

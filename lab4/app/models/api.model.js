@@ -1,15 +1,7 @@
 const db = require('../config/connectDB');
 
-const Book = (book) => {
-	this.id = cat.id;
-	this.tenLoai = cat.tenLoai;
-	this.thuTu = cat.thuTu;
-	this.anHien = cat.anHien;
-	this.tenSach = this.tenSach;
-};
-
 // Lấy loại sản phẩm
-Book.get_category = (result) => {
+const get_category = (result) => {
 	let sql = 'SELECT id, tenLoai from loai';
 	db.query(sql, (err, book_cat) => {
 		if (!err) {
@@ -21,9 +13,9 @@ Book.get_category = (result) => {
 };
 
 // Lấy tất cả sản phẩm
-Book.get_all_book = (result) => {
+const get_all_book = (result) => {
 	let sql = `SELECT * FROM sach`;
-	db.query(sql, (err, book) => {
+	return db.query(sql, (err, book) => {
 		if (!err) {
 			result(book);
 		} else {
@@ -33,7 +25,7 @@ Book.get_all_book = (result) => {
 };
 
 // Lấy sản phẩm theo loại
-Book.get_category_id = (cateId, result) => {
+const get_category_id = (cateId, result) => {
 	let sql = `SELECT * FROM sach WHERE idLoai=${cateId}`;
 	db.query(sql, (err, book) => {
 		if (!err) {
@@ -45,17 +37,19 @@ Book.get_category_id = (cateId, result) => {
 };
 
 // Thêm sản phẩm
-Book.add_book = (newData, result) => {
-	// result(data);
-	let sql = `INSERT INTO sach SET ?`;
-	db.query(sql, newData, (err, book) => {
+const add_book = (newData, urlImages, result) => {
+	let sql = `INSERT INTO sach (tenSach, moTa, urlHinh, gia, idLoai, anHien) VALUES (?, ?, ?, ?, ?, ?)`;
+	const datas = [newData.tenSach, newData.moTa, urlImages, newData.gia, newData.idLoai, newData.anHien];
+	db.query(sql, datas, (err) => {
 		if (!err) {
-			result({ id: book.insertId, ...newData });
+			result({ ...newData });
+			console.log('Thêm thành công!');
 		} else {
 			result(err, null);
+			console.log('Thêm thất bại!');
 			return;
 		}
 	});
 };
 
-module.exports = Book;
+module.exports = { get_category, get_all_book, get_category_id, add_book };
