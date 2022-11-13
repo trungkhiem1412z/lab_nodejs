@@ -4,6 +4,7 @@ const path = require('path');
 const Book = require('../models/api.model');
 const multer = require('multer');
 
+// Option Multer
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		cb(null, path.join(__dirname, '../../public/images'));
@@ -32,6 +33,12 @@ router.post('/addbook', upload.single('urlHinh'), (req, res) => {
 	});
 });
 
+// Admin xoá
+router.delete('/delete/:idBook', (req, res) => {
+	const idBook = req.params.idBook;
+	Book.delete_book(idBook);
+});
+
 // Client
 router.get('/category/:cateId', (req, res) => {
 	const cateId = req.params.cateId;
@@ -46,6 +53,15 @@ router.get('/category', (req, res) => {
 	});
 });
 
+// Lấy thông tin sản phẩm
+router.get('/book/:idBook', (req, res) => {
+	const bookId = req.params.idBook;
+	Book.get_book_id(bookId, (data) => {
+		res.send({ result: data });
+	});
+});
+
+// Lấy tất cả sản phẩm
 router.get('/book', (req, res) => {
 	Book.get_all_book((data) => {
 		res.send({ result: data });
