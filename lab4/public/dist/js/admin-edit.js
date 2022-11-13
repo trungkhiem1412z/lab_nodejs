@@ -8,23 +8,23 @@ const book_edit = async () => {
 	return response;
 };
 book_edit().then((response) => {
-	const show_book = document.querySelector('.book_info');
 	let data = response.data;
-
-	Array.from(data.result).forEach((i) => {
-		const config = { style: 'currency', currency: 'VND', maximumFractionDigits: 9 };
-		const price = new Intl.NumberFormat('vi-VN', config).format(i.gia);
-		const item_book = `
-			<div class="card col p-3 shadow-sm">
-				<img class="img-fluid rounded" src="/${i.urlHinh}" alt="thumbnail"/>
-            	<a class="nav-link fs-6 fw-semibold" href="#">${i.tenSach}</a>
-				<span class="text-center">${price}</span>
-                <div class="flex">
-                    <a href="#" onclick="deletebook(${i.id})" class="btn btn-warning">Xoá</a>
-                </div>
-			</div>
-		`;
-		show_book.innerHTML += item_book;
+	Array.from(data.result).forEach((item) => {
+		// date update
+		let d = new Date(`${item.capNhat}`);
+		const date_update = document.querySelector('#time_show');
+		date_update.innerHTML = `<span>Ngày cập nhật: ${d.toLocaleString()}</span>`;
+		//
+		const nameBook = document.querySelector('#tenSach');
+		nameBook.value = `${item.tenSach}`;
+		const moTa = document.querySelector('#moTa');
+		moTa.value = `${item.moTa}`;
+		const gia = document.querySelector('#gia');
+		gia.value = `${item.gia}`;
+		const idLoai = document.querySelector('#idLoai');
+		idLoai.value = `${item.idLoai}`;
+		const imgThumbnail = document.querySelector('#thumbnail');
+		imgThumbnail.innerHTML = `<img src="/${item.urlHinh}" alt="thumbnail"/>`;
 	});
 });
 
