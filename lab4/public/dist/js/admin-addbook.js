@@ -1,7 +1,7 @@
 const form = document.querySelector('form');
 
-form.addEventListener('submit', (e) => {
-	e.preventDefault();
+form.addEventListener('submit', (item) => {
+	item.preventDefault();
 
 	const tenSach = document.querySelector('#tenSach');
 	const moTa = document.querySelector('#moTa');

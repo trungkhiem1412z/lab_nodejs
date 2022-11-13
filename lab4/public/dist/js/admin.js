@@ -17,7 +17,7 @@ book_cat().then((response) => {
 		const item_book = `
 			<div class="card col p-3 shadow-sm">
 				<img class="img-fluid rounded" src="/${i.urlHinh}" alt="thumbnail"/>
-            	<a class="nav-link fs-6 fw-semibold" href="#">${i.tenSach}</a>
+            	<a class="nav-link fs-6 fw-semibold" href="/admin/editbook?id=${i.id}">${i.tenSach}</a>
 				<span class="text-center">${price}</span>
                 <div class="flex">
                     <a href="/admin/editbook?id=${i.id}" class="btn btn-primary">Sửa</a>
