@@ -12,7 +12,8 @@
 		"dev": "nodemon --inspect lab4/server.js",
 		"build": "webpack",
 		"watch": "webpack --watch",
-		"serve": "webpack serve --mode development"
+		"serve": "webpack serve --mode development",
+		"tsc": "tsc -w"
 	},
 	"author": "",
 	"license": "ISC",

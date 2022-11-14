@@ -1,5 +1,5 @@
 // Lấy URL
-const params = new URL(document.location).searchParams;
+const params = new URL(window.location.href).searchParams;
 // Get ID
 let id_book = params.get('id');
 // Book list
