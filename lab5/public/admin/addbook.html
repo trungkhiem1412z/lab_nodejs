@@ -1,11 +1,8 @@
 <%- include('partials/header-admin.html') -%>
 <%- include('partials/navbar-admin.html') -%>
 <div class="content">
-  Edit sản phẩm
-  <div id="time_show">
-    <!-- show -->
-  </div>
-  <div class="book_info">
+  Thêm sản phẩm
+  <div class="container">
     <form id="form">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Tên Sách</label>
@@ -17,7 +14,7 @@
       </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Giá</label>
-        <input type="number" class="form-control shadow-none" placeholder="Giá" id="gia">
+        <input type="number" class="form-control shadow-none" placeholder="Tên sách" id="gia">
       </div>
       <label for="exampleDataList" class="form-label">Loại sách</label>
       <input class="form-control shadow-none" list="datalistOptions" placeholder="Nhập loại ..." id="idLoai">
@@ -29,10 +26,7 @@
         <option value="Thiếu nhi">
       </datalist>
       <div class="mb-3">
-        <div id="thumbnail">
-          <!-- Show thumbnail -->
-        </div>
-        <label for="formFile" class="form-label">Thay đổi ảnh</label>
+        <label for="formFile" class="form-label">Ảnh bìa</label>
         <input class="form-control shadow-none" type="file" id="urlHinh" name="urlHinh">
       </div>
       <div class="mb-3 form-check">
@@ -42,8 +36,7 @@
         </label>
       </div>
       <div class="mb-3">
-        <button id="editbook" type="submit" class="btn btn-warning">Sửa thông tin</button>
-        <div id="deletebook" class="btn btn-warning">Xoá sản phẩm</div>
+        <button id="addbook" type="submit" class="btn btn-success">Thêm sách</button>
       </div>
     </form>
   </div>
@@ -51,6 +44,6 @@
 <%- include('partials/footer-admin.html') -%>
 </body>
 <!-- JS -->
-<script src="/admin-edit.js"></script>
+<script src="/admin/admin-addbook.js"></script>
 
 </html>

@@ -18,6 +18,8 @@ form.addEventListener('submit', (item) => {
 	formdata.append('idLoai', idLoai.value);
 	formdata.append('anHien', anHien.value);
 
+	console.log(formdata);
+
 	axios
 		.post('http://localhost:5000/api/addbook', formdata, {
 			headers: { 'Content-Type': 'multipart/form-data' },

@@ -9,7 +9,7 @@
 	},
 	"scripts": {
 		"start": "node server.js",
-		"dev": "nodemon --inspect lab4/server.js",
+		"dev": "nodemon --inspect lab5/server.js",
 		"build": "webpack",
 		"watch": "webpack --watch",
 		"serve": "webpack serve --mode development",

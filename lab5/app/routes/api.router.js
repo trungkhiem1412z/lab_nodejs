@@ -23,8 +23,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
 // Admin
+// ---- Thêm sản phẩm
 router.post('/addbook', upload.single('urlHinh'), (req, res) => {
 	const data = req.body;
 	const urlHinhi = req.file.filename;
@@ -33,13 +33,13 @@ router.post('/addbook', upload.single('urlHinh'), (req, res) => {
 	});
 });
 
-// Admin xoá
+// ---- Xoá sản phẩm
 router.delete('/delete/:idBook', (req, res) => {
 	const idBook = req.params.idBook;
 	Book.delete_book(idBook);
 });
 
-// Admin cập nhật sản phẩm
+// ---- Cập nhật sản phẩm
 router.put('/book/:idBook', upload.single('urlHinh'), (req, res) => {
 	const bookId = req.params.idBook;
 	const data = req.body;
@@ -49,7 +49,31 @@ router.put('/book/:idBook', upload.single('urlHinh'), (req, res) => {
 	});
 });
 
+// ---- Thêm danh mục
+router.post('/category', (req, res) => {
+	const data = req.body;
+	Book.add_category(data, (data) => {
+		res.send({ result: data });
+	});
+});
+
+// ---- Lấy chi tiết danh mục
+router.get('/category/:cateId', (req, res) => {
+	const cateId = req.params.cateId;
+	Book.get_detail_category(cateId, (data) => {
+		res.send({ result: data });
+	});
+});
+
+// ---- Xoá danh mục
+router.delete('/category/:cateId', (req, res) => {
+	const cateId = req.params.cateId;
+	console.log(cateId);
+	Book.delete_category(cateId);
+});
+
 // Client
+// ---- Lấy sách theo danh mục
 router.get('/category/:cateId', (req, res) => {
 	const cateId = req.params.cateId;
 	Book.get_category_id(cateId, (data) => {
@@ -57,13 +81,14 @@ router.get('/category/:cateId', (req, res) => {
 	});
 });
 
+// ---- Lấy tất cả danh mục
 router.get('/category', (req, res) => {
 	Book.get_category((data) => {
 		res.send({ result: data });
 	});
 });
 
-// Lấy thông tin sản phẩm
+// ---- Lấy thông tin sản phẩm
 router.get('/book/:idBook', (req, res) => {
 	const bookId = req.params.idBook;
 	Book.get_book_id(bookId, (data) => {
@@ -71,7 +96,7 @@ router.get('/book/:idBook', (req, res) => {
 	});
 });
 
-// Lấy tất cả sản phẩm
+// ---- Lấy tất cả sản phẩm
 router.get('/book', (req, res) => {
 	Book.get_all_book((data) => {
 		res.send({ result: data });
