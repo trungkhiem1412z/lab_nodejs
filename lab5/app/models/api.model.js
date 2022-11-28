@@ -38,6 +38,19 @@ const get_book_id = (idBook, result) => {
   });
 };
 
+// Update thông tin sách
+const update_book = (idBook, data, urlHinh, result) => {
+  let sql = `UPDATE sach SET tenSach = ?, moTa = ?, urlHinh = ?, gia = ?, idLoai = ?, anHien = ? WHERE id = ${idBook}`;
+  let databook = [data.tenSach, data.moTa, urlHinh, data.gia, data.idLoai, data.anHien];
+  db.query(sql, databook, (err) => {
+    if (!err) {
+      result({ 'Tình trạng': 'Thành công!' });
+    } else {
+      console.log(err);
+    }
+  });
+};
+
 // Lấy sản phẩm theo loại
 const get_category_id = (cateId, result) => {
   let sql = `SELECT * FROM sach WHERE idLoai=${cateId}`;
@@ -152,6 +165,7 @@ module.exports = {
   get_all_book,
   get_category_id,
   get_book_id,
+  update_book,
   add_book,
   add_category,
   get_detail_category,
