@@ -1,109 +1,103 @@
 const show_category = document.querySelector('.show-category');
 const formcate = document.getElementById('form-cate');
+const formcateedit = document.getElementById('form-cate-edit');
 
 const url = 'http://localhost:5000/api/category';
 
 class Category {
-	constructor(url) {
-		this.url = url;
-	}
-	getCategory() {
-		axios
-			.get(`${this.url}`)
-			.then(function (response) {
-				let data = response.data;
-				Array.from(data.result).forEach((item) => {
-					const item_category = `
-						<div class="d-flex justify-content-between mb-2 p-2 rounded border shadow-sm">
-							<div class="d-flex align-items-center">
-								<span>${item.tenLoai}</span>
-							</div>
-							<div>
-								<button onclick="category.editCategory(${item.id});" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editCategory">
-									<ion-icon name="pencil-outline"></ion-icon>
-								</button>
-								<button onclick="category.deleteCategory(${item.id});" type="button" class="btn btn-danger">
-									<ion-icon name="trash-outline"></ion-icon>
-								</button>
-							</div>
-						</div>
-            		`;
-					show_category.innerHTML += item_category;
-				});
-			})
-			.catch(function (error) {
-				show_category.innerHTML = `
-					<span> Không tìm thấy dữ liệu! </span>
-				`;
-				console.log(error);
-			});
-	}
+  constructor(url) {
+    this.url = url;
+  }
 
-	addCategory() {
-		const tenLoai = document.querySelector('#tenLoai');
-		const anHien = document.querySelector('#anHien');
+  async getCategory() {
+    try {
+      let response = await axios.get(`${this.url}`);
+      let data = response.data;
+      Array.from(data.result).forEach((item) => {
+        const item_category = `
+			<div class="d-flex justify-content-between mb-2 p-2 rounded border shadow-sm">
+				<div class="d-flex align-items-center">
+					<span>${item.tenLoai}</span>
+				</div>
+				<div>
+					<button onclick="category.editCategory(${item.id});" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editCategory">
+						<ion-icon name="pencil-outline"></ion-icon>
+					</button>
+					<button onclick="category.deleteCategory(${item.id});" type="button" class="btn btn-danger">
+						<ion-icon name="trash-outline"></ion-icon>
+					</button>
+				</div>
+			</div>
+		`;
+        show_category.innerHTML += item_category;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-		const formdata = new FormData(formcate);
-		formdata.append('tenLoai', tenLoai.value);
-		formdata.append('anHien', anHien.value);
+  async addCategory() {
+    const tenLoai = document.querySelector('#tenLoaiEdit');
+    const anHien = document.querySelector('#anHien');
 
-		axios
-			.post(this.url, formdata, {
-				headers: { 'Content-Type': 'application/json' },
-			})
-			.then(function (res) {
-				console.log('Thành công!');
-			})
-			.catch(function (err) {
-				console.log('Thất bại!');
-			});
-		location.reload();
-	}
+    const formdata = new FormData(formcateedit);
+    formdata.append('tenLoai', tenLoai.value);
+    formdata.append('anHien', anHien.value);
+    try {
+      const post = await axios.post(this.url, formdata, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      console.log('Thành công');
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-	editCategory(cateId) {
-		axios.get(`${this.url}`).then(function (response) {
-			let data = response.data;
-			Array.from(data.result).forEach((item) => {
-				const item_category = `
-						<div class="d-flex justify-content-between mb-2 p-2 rounded border shadow-sm">
-							<div class="d-flex align-items-center">
-								<span>${item.tenLoai}</span>
-							</div>
-							<div>
-								<button onclick="category.editCategory(${item.id});" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editCategory">
-									<ion-icon name="pencil-outline"></ion-icon>
-								</button>
-								<button onclick="category.deleteCategory(${item.id});" type="button" class="btn btn-danger">
-									<ion-icon name="trash-outline"></ion-icon>
-								</button>
-							</div>
-						</div>
-            		`;
-				show_category.innerHTML += item_category;
-			});
-		});
-	}
+  async editCategory(cateId) {
+    const tenLoai = document.querySelector('#tenLoai');
+    const anHien = document.querySelector('#anHien');
 
-	deleteCategory(cateId) {
-		const ques = confirm(`Bạn có chắc chắn xóa danh mục ID: ${cateId}?`);
-		if (ques == false) return;
-		axios
-			.delete(`${this.url}/${cateId}`)
-			.then(function (response) {
-				alert('Đã xóa!');
-			})
-			.catch(function (error) {
-				alert('Xoá thất bại!');
-			});
-		location.reload();
-	}
+    const formdata = new FormData(formcate);
+    formdata.append('tenLoai', tenLoai.value);
+    formdata.append('anHien', anHien.value);
+    try {
+      let response = await axios.get(`${this.url}/${cateId}`);
+      let data = response.data;
+      Array.from(data.result).forEach((item) => {
+        const nameCategory = document.querySelector('#tenLoaiEdit');
+        nameCategory.value = `${item.tenLoai}`;
+      });
+      try {
+        const put = await axios.put(this.url, formdata, {
+          headers: { 'Content-Type': 'application/json' },
+        });
+        console.log('Thành công');
+      } catch (error) {
+        console.log(error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteCategory(cateId) {
+    const ques = confirm(`Bạn có chắc chắn xóa danh mục ID: ${cateId}?`);
+    if (ques == false) return;
+    try {
+      const dlt = await axios.delete(`${this.url}/${cateId}`);
+      console.log('Đã xoá');
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 const category = new Category(url);
 category.getCategory();
+category.editCategory();
 
 // Fix
 formcate.addEventListener('submit', (item) => {
-	item.preventDefault();
-	category.addCategory();
+  item.preventDefault();
+  category.addCategory();
 });
