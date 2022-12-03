@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const Book = require('../models/api.model');
+//
+const Book = require('../models/book.model');
+const Category = require('../models/category.model');
+const User = require('../models/user.model');
+//
 const multer = require('multer');
 
 // Option Multer
@@ -52,7 +56,7 @@ router.put('/book/:idBook', upload.single('urlHinh'), (req, res) => {
 // ---- Thêm danh mục
 router.post('/category', (req, res) => {
   const data = req.body;
-  Book.add_category(data, (data) => {
+  Category.add_category(data, (data) => {
     res.send({ result: data });
   });
 });
@@ -61,7 +65,7 @@ router.post('/category', (req, res) => {
 router.get('/category/:cateId', (req, res) => {
   const cateId = req.params.cateId;
   const data = req.body;
-  Book.get_detail_category(cateId, (data) => {
+  Category.get_detail_category(cateId, (data) => {
     res.send({ result: data });
   });
 });
@@ -70,7 +74,7 @@ router.get('/category/:cateId', (req, res) => {
 router.put('/category/:cateId', (req, res) => {
   const cateId = req.params.cateId;
   const data = req.body;
-  Book.update_category(data, cateId, (datacallback) => {
+  Category.update_category(data, cateId, (datacallback) => {
     res.send({ result: datacallback });
   });
 });
@@ -78,7 +82,7 @@ router.put('/category/:cateId', (req, res) => {
 // ---- Xoá danh mục
 router.delete('/category/:cateId', (req, res) => {
   const cateId = req.params.cateId;
-  Book.delete_category(cateId, (result) => {
+  Category.delete_category(cateId, (result) => {
     res.send({ result: result });
   });
 });
@@ -87,14 +91,14 @@ router.delete('/category/:cateId', (req, res) => {
 // ---- Lấy sách theo danh mục
 router.get('/category/:cateId', (req, res) => {
   const cateId = req.params.cateId;
-  Book.get_category_id(cateId, (data) => {
+  Category.get_category_id(cateId, (data) => {
     res.send({ result: data });
   });
 });
 
 // ---- Lấy tất cả danh mục
 router.get('/category', (req, res) => {
-  Book.get_category((data) => {
+  Category.get_category((data) => {
     res.send({ result: data });
   });
 });
@@ -111,6 +115,17 @@ router.get('/book/:idBook', (req, res) => {
 router.get('/book', (req, res) => {
   Book.get_all_book((data) => {
     res.send({ result: data });
+  });
+});
+
+// ------------------------------------
+// User
+
+// Tạo user
+router.post('user', (req, res) => {
+  const data = req.body;
+  User.create_account(data, (datacallback) => {
+    res.send({ result: datacallback });
   });
 });
 
