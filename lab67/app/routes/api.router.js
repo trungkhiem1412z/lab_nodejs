@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+// Bcrypt
+const bcrypt = require('bcrypt');
 //
 const Book = require('../models/book.model');
 const Category = require('../models/category.model');
@@ -122,8 +124,28 @@ router.get('/book', (req, res) => {
 // User
 
 // Tạo user
-router.post('/user', (req, res) => {
-  const data = req.body;
+router.post('/register', (req, res) => {
+  // Lấy từng thông tin
+  const un = req.body.username;
+  const ps = req.body.password;
+  const ho = req.body.ho;
+  const ten = req.body.ten;
+  const email = req.body.email;
+  const gioitinh = req.body.gioitinh;
+  // const detail = req.body.detail;
+
+  const salt = bcrypt.genSaltSync(10);
+  const psauth = bcrypt.hashSync(ps, salt);
+
+  const data = {
+    username: un,
+    password: psauth,
+    ho: ho,
+    ten: ten,
+    email: email,
+    gioitinh: gioitinh,
+    // detail: detail,
+  };
   User.create_account(data, (result) => {
     res.send({ result: result });
   });

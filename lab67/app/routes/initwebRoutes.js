@@ -1,8 +1,10 @@
+const express = require('express');
+const router = express.Router();
 const apiApp = require('./api.router');
 const siteRouter = require('./site.router');
 const sachList = require('./sach.router');
 const admin = require('./admin.router');
-const user = require('./user.router');
+// const login = require('./login.router');
 
 let initwebRoutes = (app) => {
   // Api
@@ -11,8 +13,14 @@ let initwebRoutes = (app) => {
   app.use('/sach', sachList);
   // Admin
   app.use('/admin', admin);
-  // User
-  app.use('/user', user);
+  // Login
+  app.use('/login', (req, res) => {
+    res.render('login', { title: 'Đăng nhặp' });
+  });
+  // Register
+  app.use('/register', (req, res) => {
+    res.render('register', { title: 'Đăng kí' });
+  });
   // Home
   app.use('/', siteRouter);
   // Page 404
