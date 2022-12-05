@@ -2,6 +2,7 @@ const apiApp = require('./api.router');
 const siteRouter = require('./site.router');
 const sachList = require('./sach.router');
 const admin = require('./admin.router');
+const user = require('./user.router');
 
 let initwebRoutes = (app) => {
   // Api
@@ -10,6 +11,8 @@ let initwebRoutes = (app) => {
   app.use('/sach', sachList);
   // Admin
   app.use('/admin', admin);
+  // User
+  app.use('/user', user);
   // Home
   app.use('/', siteRouter);
   // Page 404

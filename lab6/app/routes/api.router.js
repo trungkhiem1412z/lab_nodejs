@@ -122,10 +122,42 @@ router.get('/book', (req, res) => {
 // User
 
 // Tạo user
-router.post('user', (req, res) => {
+router.post('/user', (req, res) => {
   const data = req.body;
-  User.create_account(data, (datacallback) => {
-    res.send({ result: datacallback });
+  User.create_account(data, (result) => {
+    res.send({ result: result });
+  });
+});
+
+// Lấy list user
+router.get('/user/list', (req, res) => {
+  User.get_list_user((data) => {
+    res.send({ result: data });
+  });
+});
+
+// Lấy thông tin user
+router.get('/user/:idUser', (req, res) => {
+  const idUser = req.params.idUser;
+  User.get_detail_user(idUser, (data) => {
+    res.send({ result: data });
+  });
+});
+
+// Cập nhật tài khoản
+router.put('/user/:idUser', (req, res) => {
+  const idUser = req.params.idUser;
+  const newData = req.body;
+  User.update_user(newData, idUser, (data) => {
+    res.send({ result: data });
+  });
+});
+
+// Xoá tài khoản
+router.delete('/user/:idUser', (req, res) => {
+  const idUser = req.params.idUser;
+  User.delete_user(idUser, (result) => {
+    res.send({ result: result });
   });
 });
 

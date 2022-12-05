@@ -14,7 +14,7 @@ const get_category = (result) => {
   });
 };
 
-// Thêm danh mục
+// Tạo danh mục
 const add_category = (newData, result) => {
   let sql = 'INSERT INTO loai (tenLoai, anHien) VALUES (?, ?)';
   const data_item = [newData.tenLoai, newData.anHien];
@@ -43,11 +43,11 @@ const update_category = (newData, cateId, result) => {
 };
 
 // Lấy chi tiết danh mục
-const get_detail_category = (idCategory, datacallback) => {
+const get_detail_category = (idCategory, result) => {
   let sql = 'SELECT * FROM loai WHERE id = ?';
   db.query(sql, idCategory, (err, cate_detail) => {
     if (!err) {
-      datacallback(cate_detail);
+      result(cate_detail);
     } else {
       console.log(err);
     }
