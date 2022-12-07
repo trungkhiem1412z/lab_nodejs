@@ -4,7 +4,7 @@ const apiApp = require('./api.router');
 const siteRouter = require('./site.router');
 const sachList = require('./sach.router');
 const admin = require('./admin.router');
-// const login = require('./login.router');
+const login = require('./login.router');
 
 let initwebRoutes = (app) => {
   // Api
@@ -14,9 +14,7 @@ let initwebRoutes = (app) => {
   // Admin
   app.use('/admin', admin);
   // Login
-  app.use('/login', (req, res) => {
-    res.render('login', { title: 'Đăng nhặp' });
-  });
+  app.use('/login', login);
   // Register
   app.use('/register', (req, res) => {
     res.render('register', { title: 'Đăng kí' });

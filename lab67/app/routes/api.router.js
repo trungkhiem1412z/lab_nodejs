@@ -1,3 +1,5 @@
+const db = require('../config/connectDB');
+
 const express = require('express');
 const router = express.Router();
 const path = require('path');
@@ -148,6 +150,33 @@ router.post('/register', (req, res) => {
   };
   User.create_account(data, (result) => {
     res.send({ result: result });
+  });
+});
+
+// Đăng nhập
+router.post('/login', (req, res) => {
+  let u = req.body.username;
+  let p = req.body.password;
+  let sql = 'SELECT * FROM users WHERE username = ?';
+  db.query(sql, [u], (err, result) => {
+    if (result.length <= 0) {
+      res.redirect('/login');
+      return;
+    }
+    let user = result[0];
+    let pass_fromdb = user.password;
+    const bcrypt = require('bcrypt');
+    let kq = bcrypt.compareSync(p, pass_fromdb);
+    if (kq) {
+      console.log('Đăng nhập thành công!');
+      let sess = req.session; //initialize session variable
+      sess.daDangNhap = true;
+      sess.username = user.username;
+      res.redirect('/login/success');
+    } else {
+      console.log('Sai mật khẩu!');
+      res.redirect('/login');
+    }
   });
 });
 
